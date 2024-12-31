@@ -24,6 +24,12 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 
+--connecting the React frontend to the Django API using Axios
+Set Up Axios
+Create a Recipe Component
+Update the App Component
+npm start
+
 
 
 
