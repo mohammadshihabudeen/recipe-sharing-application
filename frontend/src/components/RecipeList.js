@@ -58,6 +58,13 @@ const RecipeList = () => {
                 {recipes.map(recipe => (
                     <li key={recipe.id}>
                         <h2>{recipe.title}</h2>
+                        {recipe.image && (
+                            <img 
+                                src={`${recipe.image}`} 
+                                alt={recipe.title} 
+                                style={{ width: '200px', height: 'auto' }} 
+                            />
+                        )}
                         <p>{recipe.ingredients}</p>
                         <p>{recipe.instructions}</p>
                         <button onClick={() => handleEditClick(recipe)}>Edit</button>
