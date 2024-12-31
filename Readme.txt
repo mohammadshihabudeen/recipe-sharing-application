@@ -35,6 +35,11 @@ Create a Recipe Form Component
 Update the RecipeList Component
 Test the Recipe Creation
 
+--Steps to Fix CORS Issues
+pip install django-cors-headers
+Update Django Settings
+Configure CORS
+Restart Your Django Server
 
 
 
