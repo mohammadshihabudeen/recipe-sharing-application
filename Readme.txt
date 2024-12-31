@@ -30,6 +30,13 @@ Create a Recipe Component
 Update the App Component
 npm start
 
+--adding the functionality to create new recipes
+Create a Recipe Form Component
+Update the RecipeList Component
+Test the Recipe Creation
+
+
+
 
 
 

@@ -1,6 +1,7 @@
 // src/components/RecipeList.js
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
+import RecipeForm from './RecipeForm';
 
 const RecipeList = () => {
     const [recipes, setRecipes] = useState([]);
@@ -18,9 +19,14 @@ const RecipeList = () => {
         fetchRecipes();
     }, []);
 
+    const handleRecipeCreated = (newRecipe) => {
+        setRecipes((prevRecipes) => [...prevRecipes, newRecipe]);
+    };
+
     return (
         <div>
             <h1>Recipe List</h1>
+            <RecipeForm onRecipeCreated={handleRecipeCreated} />
             <ul>
                 {recipes.map(recipe => (
                     <li key={recipe.id}>
