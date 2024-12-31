@@ -41,6 +41,12 @@ Update Django Settings
 Configure CORS
 Restart Your Django Server
 
+--adding the functionality to update and delete recipes
+Update the RecipeList Component
+Update the RecipeForm Component
+Test the Update and Delete Functionality
+
+
 
 
 
