@@ -41,7 +41,18 @@ INSTALLED_APPS = [
     'rest_framework',
     'recipes',
     'rest_framework_simplejwt',
+    'django.contrib.sites',  # Required for allauth
+    'allauth',               # Required for allauth
+    'allauth.account',       # Required for allauth
+    'allauth.socialaccount', # Optional, if you want social authentication
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',  # Default backend
+    'allauth.account.auth_backends.AuthenticationBackend',  # Allauth backend
+)
+
+SITE_ID = 1  # Required for allauth
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -51,6 +62,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # Add this line
+    'allauth.account.middleware.AccountMiddleware',  # Add this line
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

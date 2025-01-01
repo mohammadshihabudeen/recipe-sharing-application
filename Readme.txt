@@ -63,6 +63,15 @@ include these URLs in your main urls.py file
 --Update the React Frontend
 Create an Authentication Service
 
+--Adding user registration functionality will allow users to create their own accounts and manage their recipes
+Update Django Settings
+pip install django-allauth
+Update URL Configuration
+Create a Registration Serializer
+Create Registration View
+Update URL Configuration for Registration
+Update the React Frontend
+
 
 
 
