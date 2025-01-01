@@ -1,5 +1,6 @@
 // src/components/Login.js
 import React, { useState } from 'react';
+import { TextField, Button, Typography, Box } from '@mui/material';
 import { login } from '../services/auth';
 
 const Login = ({ onLogin }) => {
@@ -10,35 +11,38 @@ const Login = ({ onLogin }) => {
         e.preventDefault();
         try {
             const data = await login(username, password);
-            onLogin(data); // Pass the token to the parent component
+            onLogin(data);
         } catch (error) {
             console.error('Login failed:', error);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Login</h2>
-            <div>
-                <label>Username:</label>
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <label>Password:</label>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </div>
-            <button type="submit">Login</button>
-        </form>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mb: 2 }}>
+            <Typography variant="h6">Login</Typography>
+            <TextField
+                label="Username"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+            />
+            <TextField
+                label="Password"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+            />
+            <Button type="submit" variant="contained" color="primary">
+                Login
+            </Button>
+        </Box>
     );
 };
 

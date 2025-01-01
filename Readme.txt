@@ -72,7 +72,9 @@ Create Registration View
 Update URL Configuration for Registration
 Update the React Frontend
 
-
+--Improving the styling and responsiveness of your application using material ui
+npm install @mui/material @emotion/react @emotion/styled
+Update all components
 
 
 

@@ -1,5 +1,6 @@
 // src/components/Register.js
 import React, { useState } from 'react';
+import { TextField, Button, Typography, Box } from '@mui/material';
 import api from '../services/api';
 
 const Register = () => {
@@ -22,37 +23,41 @@ const Register = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Register</h2>
-            <div>
-                <label>Username:</label>
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <label>Email:</label>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <label>Password:</label>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </div>
-            <button type="submit">Register</button>
-        </form>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mb: 2 }}>
+            <Typography variant="h6">Register</Typography>
+            <TextField
+                label="Username"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+            />
+            <TextField
+                label="Email"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+            />
+            <TextField
+                label="Password"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+            />
+            <Button type="submit" variant="contained" color="primary">
+                Register
+            </Button>
+        </Box>
     );
 };
 

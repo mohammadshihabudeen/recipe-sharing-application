@@ -1,5 +1,6 @@
 // src/components/RecipeForm.js
 import React, { useState, useEffect } from 'react';
+import { TextField, Button, Typography, Box } from '@mui/material';
 import api from '../services/api';
 
 const RecipeForm = ({ onRecipeCreated, editingRecipe, onRecipeUpdated }) => {
@@ -13,7 +14,7 @@ const RecipeForm = ({ onRecipeCreated, editingRecipe, onRecipeUpdated }) => {
             setTitle(editingRecipe.title);
             setIngredients(editingRecipe.ingredients);
             setInstructions(editingRecipe.instructions);
-            setImage(editingRecipe.image); // Set the image if editing
+            setImage(editingRecipe.image);
         } else {
             setTitle('');
             setIngredients('');
@@ -33,7 +34,6 @@ const RecipeForm = ({ onRecipeCreated, editingRecipe, onRecipeUpdated }) => {
         }
 
         if (editingRecipe) {
-            // Update existing recipe
             try {
                 const response = await api.put(`recipes/${editingRecipe.id}/`, formData, {
                     headers: {
@@ -45,7 +45,6 @@ const RecipeForm = ({ onRecipeCreated, editingRecipe, onRecipeUpdated }) => {
                 console.error('Error updating recipe:', error);
             }
         } else {
-            // Create new recipe
             try {
                 const response = await api.post('recipes/', formData, {
                     headers: {
@@ -57,7 +56,6 @@ const RecipeForm = ({ onRecipeCreated, editingRecipe, onRecipeUpdated }) => {
                 console.error('Error creating recipe:', error);
             }
         }
-        // Reset form fields
         setTitle('');
         setIngredients('');
         setInstructions('');
@@ -65,43 +63,48 @@ const RecipeForm = ({ onRecipeCreated, editingRecipe, onRecipeUpdated }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>{editingRecipe ? 'Edit Recipe' : 'Add a New Recipe'}</h2>
-            <div>
-                <label>Title:</label>
-                <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <label>Ingredients:</label>
-                <textarea
-                    value={ingredients}
-                    onChange={(e) => setIngredients(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <label>Instructions:</label>
-                <textarea
-                    value={instructions}
-                    onChange={(e) => setInstructions(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <label>Image:</label>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => setImage(e.target.files[0])}
-                />
-            </div>
-            <button type="submit">{editingRecipe ? 'Update Recipe' : 'Add Recipe'}</button>
-        </form>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mb: 2 }}>
+            <Typography variant="h6">{editingRecipe ? 'Edit Recipe' : 'Add a New Recipe'}</Typography>
+            <TextField
+                label="Title"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+            />
+            <TextField
+                label="Ingredients"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                multiline
+                rows={4}
+                value={ingredients}
+                onChange={(e) => setIngredients(e.target.value)}
+                required
+            />
+            <TextField
+                label="Instructions"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                multiline
+                rows={4}
+                value={instructions}
+                onChange={(e) => setInstructions(e.target.value)}
+                required
+            />
+            <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImage(e.target.files[0])}
+            />
+            <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
+                {editingRecipe ? 'Update Recipe' : 'Add Recipe'}
+            </Button>
+        </Box>
     );
 };
 

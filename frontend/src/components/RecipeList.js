@@ -1,9 +1,10 @@
 // src/components/RecipeList.js
 import React, { useEffect, useState } from 'react';
+import { Box, Typography, Button, Card, CardContent, CardMedia } from '@mui/material';
 import api from '../services/api';
 import RecipeForm from './RecipeForm';
 
-const RecipeList = ({token}) => {
+const RecipeList = ({ token }) => {
     const [recipes, setRecipes] = useState([]);
     const [editingRecipe, setEditingRecipe] = useState(null);
 
@@ -12,7 +13,7 @@ const RecipeList = ({token}) => {
             try {
                 const response = await api.get('recipes/', {
                     headers: {
-                        Authorization: `Bearer ${token}`, // Include the token in the headers
+                        Authorization: `Bearer ${token}`,
                     },
                 });
                 setRecipes(response.data);
@@ -34,7 +35,7 @@ const RecipeList = ({token}) => {
                 recipe.id === updatedRecipe.id ? updatedRecipe : recipe
             )
         );
-        setEditingRecipe(null); // Reset editing state
+        setEditingRecipe(null);
     };
 
     const handleEditClick = (recipe) => {
@@ -51,32 +52,47 @@ const RecipeList = ({token}) => {
     };
 
     return (
-        <div>
-            <h1>Recipe List</h1>
+        <Box>
+            <Typography variant="h4" gutterBottom>
+                Recipe List
+            </Typography>
             <RecipeForm 
                 onRecipeCreated={handleRecipeCreated} 
                 editingRecipe={editingRecipe} 
                 onRecipeUpdated={handleRecipeUpdated} 
             />
-            <ul>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
                 {recipes.map(recipe => (
-                    <li key={recipe.id}>
-                        <h2>{recipe.title}</h2>
+                    <Card key={recipe.id} sx={{ maxWidth: 345 }}>
                         {recipe.image && (
-                            <img 
-                                src={`${recipe.image}`} 
-                                alt={recipe.title} 
-                                style={{ width: '200px', height: 'auto' }} 
+                            <CardMedia
+                                component="img"
+                                height="140"
+                                image={`${recipe.image}`}
+                                alt={recipe.title}
                             />
                         )}
-                        <p>{recipe.ingredients}</p>
-                        <p>{recipe.instructions}</p>
-                        <button onClick={() => handleEditClick(recipe)}>Edit</button>
-                        <button onClick={() => handleDeleteClick(recipe.id)}>Delete</button>
-                    </li>
+                        <CardContent>
+                            <Typography variant="h5" component="div">
+                                {recipe.title}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                {recipe.ingredients}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                {recipe.instructions}
+                            </Typography>
+                            <Button onClick={() => handleEditClick(recipe)} variant="outlined" color="primary" sx={{ mt: 1 }}>
+                                Edit
+                            </Button>
+                            <Button onClick={() => handleDeleteClick(recipe.id)} variant="outlined" color="secondary" sx={{ mt: 1, ml: 1 }}>
+                                Delete
+                            </Button>
+                        </CardContent>
+                    </Card>
                 ))}
-            </ul>
-        </div>
+            </Box>
+        </Box>
     );
 };
 
