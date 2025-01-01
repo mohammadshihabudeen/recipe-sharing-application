@@ -3,14 +3,18 @@ import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import RecipeForm from './RecipeForm';
 
-const RecipeList = () => {
+const RecipeList = ({token}) => {
     const [recipes, setRecipes] = useState([]);
     const [editingRecipe, setEditingRecipe] = useState(null);
 
     useEffect(() => {
         const fetchRecipes = async () => {
             try {
-                const response = await api.get('recipes/');
+                const response = await api.get('recipes/', {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Include the token in the headers
+                    },
+                });
                 setRecipes(response.data);
             } catch (error) {
                 console.error('Error fetching recipes:', error);
@@ -18,7 +22,7 @@ const RecipeList = () => {
         };
 
         fetchRecipes();
-    }, []);
+    }, [token]);
 
     const handleRecipeCreated = (newRecipe) => {
         setRecipes((prevRecipes) => [...prevRecipes, newRecipe]);

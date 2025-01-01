@@ -22,4 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('recipes.urls')),  # Include the recipes app URLs
+    path('api/auth/', include('recipes.urls')),  # Include the authentication URLs
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+from django.urls import path, include
+

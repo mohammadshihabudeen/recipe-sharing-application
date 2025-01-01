@@ -46,7 +46,22 @@ Update the RecipeList Component
 Update the RecipeForm Component
 Test the Update and Delete Functionality
 
+--Adding image upload functionality for recipes
+Update the Recipe Model
+pip install Pillow
+python manage.py makemigrations
+python manage.py migrate
+Update the Recipe Serializer
+Update the Recipe Form Component
+Display the Recipe Image
 
+--Set Up User Authentication in Django
+pip install djangorestframework-simplejwt
+Update Django Settings
+Create Authentication Views
+include these URLs in your main urls.py file
+--Update the React Frontend
+Create an Authentication Service
 
 
 
